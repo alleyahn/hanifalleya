@@ -3,59 +3,77 @@ layout: layouts/base.njk
 title: Gallery
 ---
 
-<div class="gallery-container">
+<div class="gallery-container vertical-gallery">
   <div class="gallery-header">
-    <h1>Photo Gallery</h1>
-    <p class="gallery-description">A collection of photographs from my travels and projects. Scroll horizontally to explore the gallery.</p>
+    <h1>Postcard Collection</h1>
+    <p class="gallery-description">Moments captured as postcards from my travels and everyday life. Open on desktop for best experience.</p>
   </div>
   
-  <div class="gallery-scroll">
+  <div class="postcard-gallery">
     {% if collections.gallery and collections.gallery.length > 0 %}
       {% for image in collections.gallery | reverse %}
-        <div class="gallery-item" 
+        <div class="postcard" 
              data-index="{{ loop.index0 }}"
              data-title="{{ image.data.title }}"
              data-date="{{ image.date | dateFormat }}"
              data-location="{{ image.data.location }}"
              data-image="{{ image.data.image }}"
+             data-emoji="{{ image.data.emoji or '🌍' }}"
              data-caption="{{ image.templateContent | striptags | trim }}">
-          <img src="{{ image.data.image }}" alt="{{ image.data.alt or image.data.title }}">
-          <div class="gallery-overlay">
-            <h3>{{ image.data.title }}</h3>
-            <p>{{ image.date | dateFormat }}</p>
-            {% if image.data.location %}<p class="location">{{ image.data.location }}</p>{% endif %}
+          <div class="postcard-front">
+            <div class="postcard-image-container">
+              <img src="{{ image.data.image }}" alt="{{ image.data.alt or image.data.title }}">
+            </div>
+            <div class="postcard-overlay">
+              {% if image.data.location %}
+                <h3>{{ image.data.location }}</h3>
+              {% else %}
+                <h3>{{ image.data.title }}</h3>
+              {% endif %}
+            </div>
           </div>
         </div>
       {% endfor %}
     {% else %}
       <div class="empty-gallery">
-        <p>No images added to the gallery yet.</p>
+        <p>No postcards in your collection yet.</p>
       </div>
     {% endif %}
   </div>
-  
-  <div class="scroll-arrow scroll-left">←</div>
-  <div class="scroll-arrow scroll-right">→</div>
 </div>
 
-<!-- Image Modal -->
-<div class="image-modal">
-  <div class="modal-content">
-    <div class="modal-close">×</div>
-    <div class="modal-navigation modal-prev">←</div>
-    <div class="modal-navigation modal-next">→</div>
-    
-    <div class="modal-image-container">
-      <img src="" alt="" class="modal-image">
-    </div>
-    
-    <div class="modal-info">
-      <h2 class="modal-title"></h2>
-      <div class="modal-metadata">
-        <span class="modal-date">Date: <time></time></span>
-        <span class="modal-location"></span>
+<!-- Postcard Modal -->
+<div class="postcard-modal">
+  <div class="modal-close">×</div>
+  <div class="modal-navigation modal-prev">←</div>
+  <div class="modal-navigation modal-next">→</div>
+  
+  <div class="postcard-modal-content">
+    <div class="postcard-modal-card">
+      <!-- Front of the postcard (image) -->
+      <div class="postcard-modal-front">
+        <div class="postcard-modal-image-container">
+          <img src="" alt="" class="postcard-modal-image">
+        </div>
+        <div class="postcard-modal-title"></div>
       </div>
-      <p class="modal-caption"></p>
+      
+      <!-- Back of the postcard (message) -->
+      <div class="postcard-modal-back">
+        <div class="postcard-modal-back-top">
+          <div class="postcard-modal-date"></div>
+          <div class="postcard-modal-postage">
+            <span class="emoji"></span>
+          </div>
+        </div>
+        <div class="postcard-modal-back-bottom">
+          <div class="postcard-modal-message"></div>
+          <div class="postcard-modal-signature">
+            <div class="postcard-modal-greeting">Greetings from {{ image.data.location or "my travels" }}!</div>
+            <div class="postcard-modal-name">Alleya</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -63,66 +81,52 @@ title: Gallery
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Elements
-    const scrollContainer = document.querySelector('.gallery-scroll');
-    const leftArrow = document.querySelector('.scroll-left');
-    const rightArrow = document.querySelector('.scroll-right');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const modal = document.querySelector('.image-modal');
+    const postcards = document.querySelectorAll('.postcard');
+    const modal = document.querySelector('.postcard-modal');
     const modalClose = document.querySelector('.modal-close');
-    const modalImage = document.querySelector('.modal-image');
-    const modalTitle = document.querySelector('.modal-title');
-    const modalDate = document.querySelector('.modal-date time');
-    const modalLocation = document.querySelector('.modal-location');
-    const modalCaption = document.querySelector('.modal-caption');
+    const modalContent = document.querySelector('.postcard-modal-content');
+    const modalCard = document.querySelector('.postcard-modal-card');
+    const modalImage = document.querySelector('.postcard-modal-image');
+    const modalTitle = document.querySelector('.postcard-modal-title');
+    const modalFront = document.querySelector('.postcard-modal-front');
+    const modalBack = document.querySelector('.postcard-modal-back');
+    const modalPostage = document.querySelector('.postcard-modal-postage .emoji');
+    const modalDate = document.querySelector('.postcard-modal-date');
+    const modalMessage = document.querySelector('.postcard-modal-message');
+    const modalGreeting = document.querySelector('.postcard-modal-greeting');
     const modalPrev = document.querySelector('.modal-prev');
     const modalNext = document.querySelector('.modal-next');
     
     let currentIndex = 0;
+    let showingBack = false;
     
-    // Scroll amount per click (approximately one item width + gap)
-    const scrollAmount = 330;
-    
-    // Horizontal scrolling
-    leftArrow.addEventListener('click', function() {
-      scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-    
-    rightArrow.addEventListener('click', function() {
-      scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
-    
-    // Hide arrows when at the beginning or end
-    scrollContainer.addEventListener('scroll', function() {
-      if (scrollContainer.scrollLeft <= 10) {
-        leftArrow.style.opacity = '0.3';
-      } else {
-        leftArrow.style.opacity = '1';
-      }
-      
-      if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 10) {
-        rightArrow.style.opacity = '0.3';
-      } else {
-        rightArrow.style.opacity = '1';
-      }
-    });
-    
-    // Initial check
-    if (scrollContainer.scrollLeft <= 10) {
-      leftArrow.style.opacity = '0.3';
-    }
-    
-    // Modal functionality
-    function openModal(item) {
-      const index = parseInt(item.getAttribute('data-index'));
+    // Postcard modal functionality
+    function openPostcard(postcard) {
+      const index = parseInt(postcard.getAttribute('data-index'));
       currentIndex = index;
+      showingBack = false;
       
-      // Update modal content from data attributes
-      modalImage.src = item.getAttribute('data-image');
-      modalImage.alt = item.getAttribute('data-title');
-      modalTitle.textContent = item.getAttribute('data-title');
-      modalDate.textContent = item.getAttribute('data-date');
-      modalLocation.textContent = 'Location: ' + item.getAttribute('data-location');
-      modalCaption.textContent = item.getAttribute('data-caption');
+      // Update postcard front content from data attributes
+      modalImage.src = postcard.getAttribute('data-image');
+      modalImage.alt = postcard.getAttribute('data-title');
+      modalTitle.textContent = postcard.getAttribute('data-title');
+      
+      // Update postcard back content
+      modalPostage.textContent = postcard.getAttribute('data-emoji');
+      modalDate.textContent = postcard.getAttribute('data-date');
+      modalMessage.textContent = postcard.getAttribute('data-caption');
+      
+      // Location specific greeting
+      const location = postcard.getAttribute('data-location');
+      if (location && location !== 'null' && location !== 'undefined') {
+        modalGreeting.textContent = `Greetings from ${location}!`;
+      } else {
+        modalGreeting.textContent = 'Greetings!';
+      }
+      
+      // Show front of postcard
+      modalFront.style.display = 'block';
+      modalBack.style.display = 'none';
       
       // Update navigation visibility
       updateNavigation();
@@ -132,9 +136,23 @@ title: Gallery
       document.body.style.overflow = 'hidden';
     }
     
-    function closeModal() {
+    function closePostcard() {
       modal.classList.remove('active');
       document.body.style.overflow = '';
+    }
+    
+    function flipPostcard() {
+      if (showingBack) {
+        // Show front
+        modalBack.style.display = 'none';
+        modalFront.style.display = 'block';
+        showingBack = false;
+      } else {
+        // Show back
+        modalFront.style.display = 'none';
+        modalBack.style.display = 'flex';
+        showingBack = true;
+      }
     }
     
     function updateNavigation() {
@@ -145,73 +163,97 @@ title: Gallery
         modalPrev.style.visibility = 'visible';
       }
       
-      if (currentIndex === galleryItems.length - 1) {
+      if (currentIndex === postcards.length - 1) {
         modalNext.style.visibility = 'hidden';
       } else {
         modalNext.style.visibility = 'visible';
       }
     }
     
-    function prevImage() {
+    function prevPostcard() {
       if (currentIndex > 0) {
         currentIndex--;
-        const prevItem = galleryItems[currentIndex];
-        
-        modalImage.src = prevItem.getAttribute('data-image');
-        modalImage.alt = prevItem.getAttribute('data-title');
-        modalTitle.textContent = prevItem.getAttribute('data-title');
-        modalDate.textContent = prevItem.getAttribute('data-date');
-        modalLocation.textContent = 'Location: ' + prevItem.getAttribute('data-location');
-        modalCaption.textContent = prevItem.getAttribute('data-caption');
-        
-        updateNavigation();
+        updatePostcardContent(postcards[currentIndex]);
       }
     }
     
-    function nextImage() {
-      if (currentIndex < galleryItems.length - 1) {
+    function nextPostcard() {
+      if (currentIndex < postcards.length - 1) {
         currentIndex++;
-        const nextItem = galleryItems[currentIndex];
-        
-        modalImage.src = nextItem.getAttribute('data-image');
-        modalImage.alt = nextItem.getAttribute('data-title');
-        modalTitle.textContent = nextItem.getAttribute('data-title');
-        modalDate.textContent = nextItem.getAttribute('data-date');
-        modalLocation.textContent = 'Location: ' + nextItem.getAttribute('data-location');
-        modalCaption.textContent = nextItem.getAttribute('data-caption');
-        
-        updateNavigation();
+        updatePostcardContent(postcards[currentIndex]);
       }
     }
     
-    // Event listeners for modal
-    galleryItems.forEach(item => {
-      item.addEventListener('click', function() {
-        openModal(this);
+    function updatePostcardContent(postcard) {
+      // Reset to front view
+      showingBack = false;
+      modalFront.style.display = 'block';
+      modalBack.style.display = 'none';
+      
+      // Update content
+      modalImage.src = postcard.getAttribute('data-image');
+      modalImage.alt = postcard.getAttribute('data-title');
+      modalTitle.textContent = postcard.getAttribute('data-title');
+      
+      modalPostage.textContent = postcard.getAttribute('data-emoji');
+      modalDate.textContent = postcard.getAttribute('data-date');
+      modalMessage.textContent = postcard.getAttribute('data-caption');
+      
+      // Location specific greeting
+      const location = postcard.getAttribute('data-location');
+      if (location && location !== 'null' && location !== 'undefined') {
+        modalGreeting.textContent = `Greetings from ${location}!`;
+      } else {
+        modalGreeting.textContent = 'Greetings!';
+      }
+      
+      updateNavigation();
+    }
+    
+    // Event listeners for postcard interaction
+    postcards.forEach(postcard => {
+      postcard.addEventListener('click', function() {
+        openPostcard(this);
       });
     });
     
-    modalClose.addEventListener('click', closeModal);
+    modalClose.addEventListener('click', closePostcard);
     
     modal.addEventListener('click', function(e) {
       if (e.target === modal) {
-        closeModal();
+        closePostcard();
       }
     });
     
-    modalPrev.addEventListener('click', prevImage);
-    modalNext.addEventListener('click', nextImage);
+    modalCard.addEventListener('click', function(e) {
+      // Only flip if clicking on the card itself, not navigation buttons
+      if (e.target !== modalPrev && e.target !== modalNext && e.target !== modalClose) {
+        flipPostcard();
+      }
+    });
+    
+    modalPrev.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent card flip
+      prevPostcard();
+    });
+    
+    modalNext.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent card flip
+      nextPostcard();
+    });
     
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
       if (!modal.classList.contains('active')) return;
       
       if (e.key === 'Escape') {
-        closeModal();
+        closePostcard();
       } else if (e.key === 'ArrowLeft') {
-        prevImage();
+        prevPostcard();
       } else if (e.key === 'ArrowRight') {
-        nextImage();
+        nextPostcard();
+      } else if (e.key === ' ' || e.key === 'Enter') {
+        flipPostcard();
       }
     });
   });

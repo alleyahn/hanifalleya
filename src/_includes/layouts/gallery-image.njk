@@ -20,20 +20,79 @@ layout: layouts/base.njk
   </div>
   
   {% if tags %}
-<div class="image-tags">
-  <h3>Tags:</h3>
-  <div class="tags-list">
-    {% for tag in tags %}
-      {% if tag != "gallery" %}
-        <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
-      {% endif %}
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
+    <div class="image-tags">
+      <h3>Tags:</h3>
+      <div class="tags-list">
+        {% for tag in tags %}
+          {% if tag != "gallery" %}
+            <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 
   <div class="image-navigation">
     <a href="/gallery">← Back to Gallery</a>
   </div>
 </div>
+
+<style>
+  /* Improved individual image page styles */
+  .single-image-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+  
+  .featured-image-full {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    max-height: 70vh;
+  }
+  
+  .featured-image-full img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+  }
+  
+  /* Apply postcard effect to the image container */
+  .featured-image-full {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .featured-image-full::before,
+  .featured-image-full::after {
+    content: "";
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    z-index: -1;
+  }
+  
+  .featured-image-full::before {
+    top: 5px;
+    left: -5px;
+    right: 5px;
+    bottom: -5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transform: rotate(-1deg);
+  }
+  
+  .featured-image-full::after {
+    top: 7px;
+    left: 3px;
+    right: -3px;
+    bottom: -7px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transform: rotate(1.5deg);
+  }
+</style>
