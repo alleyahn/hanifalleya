@@ -1,0 +1,39 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="content-container single-image-container">
+  <div class="image-header">
+    <h1>{{ title }}</h1>
+    <div class="image-meta">
+      <time datetime="{{ page.date | dateIso }}">{{ page.date | dateFormat }}</time>
+      {% if location %}<span class="location">Location: {{ location }}</span>{% endif %}
+    </div>
+  </div>
+  
+  <div class="featured-image-full">
+    <img src="{{ image }}" alt="{{ alt or title }}">
+  </div>
+  
+  <div class="image-description">
+    {{ content | safe }}
+  </div>
+  
+  {% if tags %}
+<div class="image-tags">
+  <h3>Tags:</h3>
+  <div class="tags-list">
+    {% for tag in tags %}
+      {% if tag != "gallery" %}
+        <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+
+  <div class="image-navigation">
+    <a href="/gallery">← Back to Gallery</a>
+  </div>
+</div>

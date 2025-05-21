@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: Tags
+---
+
+<!-- Debug info - remove after troubleshooting -->
+<div style="display: none;">
+  <h3>Available Tags:</h3>
+  <ul>
+    {% for tag in collections.tagList %}
+      <li>{{ tag }}</li>
+    {% endfor %}
+  </ul>
+  
+  <h3>Tagged Items:</h3>
+  {% for tag, items in collections.taggedItems %}
+    <h4>{{ tag }} ({{ items.length }} items)</h4>
+    <ul>
+      {% for item in items %}
+        <li>{{ item.data.title }}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</div>
+
+<div class="content-container tags-container">
+  <h1>All Tags</h1>
+  
+  <div class="tags-list">
+    {% for tag in collections.tagList %}
+      <a href="/tags/{{ tag | slug }}/" class="tag-link">{{ tag }}</a>
+    {% endfor %}
+  </div>
+</div>

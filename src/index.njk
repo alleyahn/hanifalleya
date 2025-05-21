@@ -1,0 +1,89 @@
+---
+layout: layouts/base.njk
+title: Home
+---
+
+<!-- Debug Info -->
+<div style="display: none;">
+  <p>Featured images count: {{ collections.featuredImage.length }}</p>
+  {% if collections.featuredImage.length > 0 %}
+    {% set featImg = collections.featuredImage[0] %}
+    <p>Featured image: {{ featImg.data.title }}</p>
+    <p>Featured status: {{ featImg.data.featured }}</p>
+    <p>Image path: {{ featImg.data.image }}</p>
+  {% endif %}
+  
+  <p>All gallery items:</p>
+  {% for item in collections.gallery %}
+    <p>{{ item.data.title }} - Featured: {{ item.data.featured }}</p>
+  {% endfor %}
+</div>
+
+<!-- Main content container -->
+<div class="main-container">
+
+  <!-- Featured image section - showing featured or latest gallery image -->
+  <div class="featured-image">
+    {% if collections.featuredImage.length > 0 %}
+      {% set featImg = collections.featuredImage[0] %}
+      <img src="{{ featImg.data.image }}" alt="{{ featImg.data.alt or featImg.data.title }}">
+      <div class="image-meta">
+        {% if featImg.data.location %}{{ featImg.data.location }}{% endif %}
+        {% if featImg.data.location and featImg.date %} • {% endif %}
+        {% if featImg.date %}{{ featImg.date | dateFormat }}{% endif %}
+      </div>
+    {% else %}
+      <!-- Placeholder if no images exist yet -->
+      <img src="/assets/images/03.jpg" alt="Featured photograph">
+      <div class="image-meta">
+        Add photos to your gallery to see them featured here
+      </div>
+    {% endif %}
+    
+    <!-- Name overlay -->
+    <div class="name-overlay">
+      <h1 data-text="{{ site.name }}">{{ site.name }}</h1>
+      <p>{{ site.tagline }}</p>
+    </div>
+  </div>
+  
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Latest entries -->
+    <div class="latest-entries">
+      <h2>On my mind lately...</h2>
+      
+      {% if collections.latestPosts.length > 0 %}
+        {% for post in collections.latestPosts %}
+          <div class="entry">
+            <h3>
+              <a href="{{ post.url }}">{{ post.data.title }} | {{ post.date | dateFormat }}</a>
+            </h3>
+            <p>{{ post.data.excerpt }}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <!-- Placeholder entries if no blog posts exist yet -->
+        <div class="entry">
+          <h3>Welcome to my website | {{ page.date | dateFormat }}</h3>
+          <p>This is a placeholder until you add blog posts</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Currently listening -->
+    <div class="currently-listening">
+      <h2>Heavy rotation</h2>
+      <div class="spotify-embed">
+        <!-- Spotify embed code goes here -->
+        <iframe src="https://open.spotify.com/embed/track/1HoRAFcgEZSUJesK23aRnZ" 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                allowtransparency="true" 
+                allow="encrypted-media">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>

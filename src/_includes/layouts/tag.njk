@@ -1,0 +1,48 @@
+---
+layout: layouts/base.njk
+---
+<div class="content-container tag-container">
+  <h1>Content tagged with "{{ tag }}"</h1>
+  
+  <div class="tag-content">
+    {% set taggedItems = collections.taggedItems[tag] %}
+    
+    {% if taggedItems.length > 0 %}
+      {% for item in taggedItems %}
+        <article class="tag-item">
+          <h2>
+            <a href="{{ item.url }}">{{ item.data.title }}</a>
+          </h2>
+          <p class="tag-item-date">{{ item.date | dateFormat }}</p>
+          
+          {% if item.data.excerpt %}
+            <p class="tag-item-excerpt">{{ item.data.excerpt }}</p>
+          {% endif %}
+          
+          {% if item.data.image %}
+            <div class="tag-item-image">
+              <img src="{{ item.data.image }}" alt="{{ item.data.alt or item.data.title }}">
+            </div>
+          {% endif %}
+          
+          <div class="tag-item-meta">
+            <a href="{{ item.url }}" class="read-more">
+              {% if item.data.image %}
+                View Image
+              {% else %}
+                View Post
+              {% endif %}
+              →
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>No items found with this tag.</p>
+    {% endif %}
+  </div>
+  
+  <div class="tag-navigation">
+    <a href="/tags/">View All Tags</a>
+  </div>
+</div>

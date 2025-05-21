@@ -1,0 +1,218 @@
+---
+layout: layouts/base.njk
+title: Gallery
+---
+
+<div class="gallery-container">
+  <div class="gallery-header">
+    <h1>Photo Gallery</h1>
+    <p class="gallery-description">A collection of photographs from my travels and projects. Scroll horizontally to explore the gallery.</p>
+  </div>
+  
+  <div class="gallery-scroll">
+    {% if collections.gallery and collections.gallery.length > 0 %}
+      {% for image in collections.gallery | reverse %}
+        <div class="gallery-item" 
+             data-index="{{ loop.index0 }}"
+             data-title="{{ image.data.title }}"
+             data-date="{{ image.date | dateFormat }}"
+             data-location="{{ image.data.location }}"
+             data-image="{{ image.data.image }}"
+             data-caption="{{ image.templateContent | striptags | trim }}">
+          <img src="{{ image.data.image }}" alt="{{ image.data.alt or image.data.title }}">
+          <div class="gallery-overlay">
+            <h3>{{ image.data.title }}</h3>
+            <p>{{ image.date | dateFormat }}</p>
+            {% if image.data.location %}<p class="location">{{ image.data.location }}</p>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty-gallery">
+        <p>No images added to the gallery yet.</p>
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="scroll-arrow scroll-left">←</div>
+  <div class="scroll-arrow scroll-right">→</div>
+</div>
+
+<!-- Image Modal -->
+<div class="image-modal">
+  <div class="modal-content">
+    <div class="modal-close">×</div>
+    <div class="modal-navigation modal-prev">←</div>
+    <div class="modal-navigation modal-next">→</div>
+    
+    <div class="modal-image-container">
+      <img src="" alt="" class="modal-image">
+    </div>
+    
+    <div class="modal-info">
+      <h2 class="modal-title"></h2>
+      <div class="modal-metadata">
+        <span class="modal-date">Date: <time></time></span>
+        <span class="modal-location"></span>
+      </div>
+      <p class="modal-caption"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const scrollContainer = document.querySelector('.gallery-scroll');
+    const leftArrow = document.querySelector('.scroll-left');
+    const rightArrow = document.querySelector('.scroll-right');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modal = document.querySelector('.image-modal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalImage = document.querySelector('.modal-image');
+    const modalTitle = document.querySelector('.modal-title');
+    const modalDate = document.querySelector('.modal-date time');
+    const modalLocation = document.querySelector('.modal-location');
+    const modalCaption = document.querySelector('.modal-caption');
+    const modalPrev = document.querySelector('.modal-prev');
+    const modalNext = document.querySelector('.modal-next');
+    
+    let currentIndex = 0;
+    
+    // Scroll amount per click (approximately one item width + gap)
+    const scrollAmount = 330;
+    
+    // Horizontal scrolling
+    leftArrow.addEventListener('click', function() {
+      scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    
+    rightArrow.addEventListener('click', function() {
+      scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+    
+    // Hide arrows when at the beginning or end
+    scrollContainer.addEventListener('scroll', function() {
+      if (scrollContainer.scrollLeft <= 10) {
+        leftArrow.style.opacity = '0.3';
+      } else {
+        leftArrow.style.opacity = '1';
+      }
+      
+      if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 10) {
+        rightArrow.style.opacity = '0.3';
+      } else {
+        rightArrow.style.opacity = '1';
+      }
+    });
+    
+    // Initial check
+    if (scrollContainer.scrollLeft <= 10) {
+      leftArrow.style.opacity = '0.3';
+    }
+    
+    // Modal functionality
+    function openModal(item) {
+      const index = parseInt(item.getAttribute('data-index'));
+      currentIndex = index;
+      
+      // Update modal content from data attributes
+      modalImage.src = item.getAttribute('data-image');
+      modalImage.alt = item.getAttribute('data-title');
+      modalTitle.textContent = item.getAttribute('data-title');
+      modalDate.textContent = item.getAttribute('data-date');
+      modalLocation.textContent = 'Location: ' + item.getAttribute('data-location');
+      modalCaption.textContent = item.getAttribute('data-caption');
+      
+      // Update navigation visibility
+      updateNavigation();
+      
+      // Show modal
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    function updateNavigation() {
+      // Update navigation visibility
+      if (currentIndex === 0) {
+        modalPrev.style.visibility = 'hidden';
+      } else {
+        modalPrev.style.visibility = 'visible';
+      }
+      
+      if (currentIndex === galleryItems.length - 1) {
+        modalNext.style.visibility = 'hidden';
+      } else {
+        modalNext.style.visibility = 'visible';
+      }
+    }
+    
+    function prevImage() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        const prevItem = galleryItems[currentIndex];
+        
+        modalImage.src = prevItem.getAttribute('data-image');
+        modalImage.alt = prevItem.getAttribute('data-title');
+        modalTitle.textContent = prevItem.getAttribute('data-title');
+        modalDate.textContent = prevItem.getAttribute('data-date');
+        modalLocation.textContent = 'Location: ' + prevItem.getAttribute('data-location');
+        modalCaption.textContent = prevItem.getAttribute('data-caption');
+        
+        updateNavigation();
+      }
+    }
+    
+    function nextImage() {
+      if (currentIndex < galleryItems.length - 1) {
+        currentIndex++;
+        const nextItem = galleryItems[currentIndex];
+        
+        modalImage.src = nextItem.getAttribute('data-image');
+        modalImage.alt = nextItem.getAttribute('data-title');
+        modalTitle.textContent = nextItem.getAttribute('data-title');
+        modalDate.textContent = nextItem.getAttribute('data-date');
+        modalLocation.textContent = 'Location: ' + nextItem.getAttribute('data-location');
+        modalCaption.textContent = nextItem.getAttribute('data-caption');
+        
+        updateNavigation();
+      }
+    }
+    
+    // Event listeners for modal
+    galleryItems.forEach(item => {
+      item.addEventListener('click', function() {
+        openModal(this);
+      });
+    });
+    
+    modalClose.addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    modalPrev.addEventListener('click', prevImage);
+    modalNext.addEventListener('click', nextImage);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (!modal.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'ArrowLeft') {
+        prevImage();
+      } else if (e.key === 'ArrowRight') {
+        nextImage();
+      }
+    });
+  });
+</script>
