@@ -15,7 +15,7 @@ Alleya is a Design Researcher with a social sciences background and five years o
 **Universitas Indonesia** • 2014-2019  
 Bachelor of Social Sciences (S.Sos) in International Relations  
 
-⭐ Best Thesis Award 2019 
+⭐ Best Thesis Award in my graduating batch 
 
 ⭐ Studied abroad at Yonsei University, South Korea
 

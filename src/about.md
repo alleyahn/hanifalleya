@@ -11,4 +11,7 @@ I'm Alleya Hanifa. **Alleya** for short. Currently a **Design Researcher** at ba
 Currently working at [GovTech Edu](https://govtechedu.id). If you're here for business, take a look at my [cv](/cv/) here.
 
 ## What am I up to? 
-Alleya is doing these right [now](/now)
+Alleya is doing these right **[now](/now)**
+
+## About this blog
+This blog was built using Eleventy. Codes were entirely provided by Claude. 

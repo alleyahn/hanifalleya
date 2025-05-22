@@ -22,8 +22,7 @@
 </head>
 
 
-<body{% if page.url != '/' %} class="scrollable-page"{% endif %}>
-
+<body{% if page.url != '/' %} class="scrollable-page{% if bodyClass %} {{ bodyClass }}{% endif %}"{% endif %}>
 
   <script src="/assets/js/site-name.js"></script>
 
@@ -38,6 +37,23 @@
   <!-- Main content -->
   {{ content | safe }}
 
+<!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <p>&copy; {{ site.name }} • 2025</p>
+        <p>Made with ❤️ using <a href="https://www.11ty.dev/" target="_blank">Eleventy</a></p>
+      </div>
+      <div class="footer-right">
+        <nav class="footer-nav">
+          <a href="/uses">Uses</a>
+          <a href="/cv">CV</a>
+          <a href="/now">Now</a>
+          <a href="/tags">Tags</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
   
 
 </body>

@@ -162,7 +162,7 @@ p {
 nav {
   background-color: var(--nav-bg);
   padding: 15px 0;
-  text-align: right;
+  text-align: left;
   z-index: 100;
 }
 
@@ -180,6 +180,37 @@ nav a:hover {
 nav a.active {
   font-weight: 600;
   color: var(--navbar-link-active);
+}
+
+/* Mobile Navigation Styles */
+@media (max-width: 768px) {
+  nav {
+    padding: 10px 0;
+    text-align: center; /* Center on mobile for better balance */
+  }
+  
+  nav a {
+    display: inline-block;
+    margin: 5px 10px; /* Smaller margins on mobile */
+    font-size: 16px; /* Slightly smaller text */
+    padding: 8px 12px; /* Add padding to make links easier to tap */
+    border-radius: 20px; /* Rounded corners for modern look */
+    transition: background-color 0.2s;
+  }
+  
+  nav a:hover,
+  nav a:focus {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background on hover/focus */
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  nav a {
+    margin: 3px 5px;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
 }
 
 /* --------- 6. CARDS & COMPONENTS --------- */
@@ -759,13 +790,18 @@ nav a.active {
 /* Gallery Container */
 .vertical-gallery {
   padding-bottom: 40px;
-  max-width: 900px;
 }
 
 .gallery-header {
   padding: 20px 40px;
-  max-width: 1600px;
   margin: 0 auto;
+}
+
+/* Match gallery header width constraints with grid */
+@media (min-width: 1600px) {
+  .gallery-header {
+    max-width: 1400px;
+  }
 }
 
 .gallery-header h1 {
@@ -782,11 +818,10 @@ nav a.active {
 /* Postcard Gallery Grid */
 .postcard-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 350px));
   gap: 30px;
   padding: 20px 40px;
   width: 100%;
-  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -801,6 +836,35 @@ nav a.active {
   transition: transform 0.3s, box-shadow 0.3s;
   background-color: var(--card-bg);
 }
+
+/* Random rotations for postcards */
+.postcard:nth-child(1) { transform: rotate(2deg); }
+.postcard:nth-child(2) { transform: rotate(-1deg); }
+.postcard:nth-child(3) { transform: rotate(3deg); }
+.postcard:nth-child(4) { transform: rotate(-2deg); }
+.postcard:nth-child(5) { transform: rotate(1deg); }
+.postcard:nth-child(6) { transform: rotate(-3deg); }
+.postcard:nth-child(7) { transform: rotate(2deg); }
+.postcard:nth-child(8) { transform: rotate(-1deg); }
+.postcard:nth-child(9) { transform: rotate(1deg); }
+.postcard:nth-child(10) { transform: rotate(-2deg); }
+.postcard:nth-child(11) { transform: rotate(3deg); }
+.postcard:nth-child(12) { transform: rotate(-1deg); }
+
+/* Continue the pattern for more postcards */
+.postcard:nth-child(n+13) {
+  transform: rotate(calc(((var(--random, 1) * 5) - 2.5) * 1deg));
+}
+
+/* Fallback pattern for browsers that don't support CSS calc with custom properties */
+.postcard:nth-child(13) { transform: rotate(1deg); }
+.postcard:nth-child(14) { transform: rotate(-2deg); }
+.postcard:nth-child(15) { transform: rotate(2deg); }
+.postcard:nth-child(16) { transform: rotate(-1deg); }
+.postcard:nth-child(17) { transform: rotate(3deg); }
+.postcard:nth-child(18) { transform: rotate(-3deg); }
+.postcard:nth-child(19) { transform: rotate(1deg); }
+.postcard:nth-child(20) { transform: rotate(-1deg); }
 
 .postcard::before,
 .postcard::after {
@@ -874,7 +938,7 @@ nav a.active {
   font-size: 1.2rem;
   color: white;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  font-style: italic;
+  font-family: 'Shantell Sans', cursive, sans-serif;
 }
 
 /* Empty Gallery State */
@@ -1008,7 +1072,7 @@ nav a.active {
 }
 
 .postcard-modal-date {
-  font-family: 'Shantell Sans', monospace;
+  font-family: 'Sono', monospace;
   color: var(--text-muted);
   font-size: 1rem;
   padding: 5px 10px;
@@ -1049,15 +1113,15 @@ nav a.active {
   font-size: 1.1rem;
   color: var(--text-muted);
   text-align: center;
-  margin-bottom: 5px;
+  margin-bottom: 5px; /* Added margin-bottom for closer spacing */
 }
 
 .postcard-modal-name {
-  font-family: 'Mogra', cursive, sans-serif;
+  font-family: 'Shantell Sans', cursive, sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 0; /* Removed top margin */
   color: var(--accent-color);
 }
 
@@ -1114,7 +1178,6 @@ nav a.active {
   right: 20px;
 }
 
-/* Responsive Adjustments */
 /* Responsive Adjustments - to be added to respective media query sections */
 @media (max-width: 900px) {
   .postcard-gallery {
@@ -1126,6 +1189,21 @@ nav a.active {
   .postcard-modal-content {
     width: 90%;
     max-width: 600px;
+    max-height: 85vh;
+  }
+  
+  .postcard-modal-card {
+    max-height: 85vh;
+  }
+  
+  .postcard-modal-back {
+    overflow-y: auto;
+  }
+  
+  .postcard-modal-message {
+    font-size: 1.2rem;
+    max-height: none;
+    overflow-y: visible;
   }
   
   .modal-prev {
@@ -1134,10 +1212,6 @@ nav a.active {
   
   .modal-next {
     right: 10px;
-  }
-  
-  .postcard-modal-message {
-    font-size: 1.2rem;
   }
   
   .postcard-modal-name {
@@ -1150,6 +1224,20 @@ nav a.active {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 15px;
     padding: 10px 15px;
+  }
+  
+  .postcard-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .postcard-modal-card {
+    max-height: 90vh;
+  }
+  
+  .postcard-modal-back {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
   .postcard-modal-back-bottom {
@@ -1165,7 +1253,8 @@ nav a.active {
   }
   
   .postcard-modal-message {
-    max-height: 200px;
+    max-height: none;
+    overflow-y: visible;
   }
 }
 
@@ -1624,5 +1713,115 @@ nav a.active {
 @media (max-width: 480px) {
   .tag-item-image {
     height: 150px;
+  }
+}
+
+/* --------- FOOTER STYLES --------- */
+.site-footer {
+  background-color: var(--nav-bg); /* Same as your navigation */
+  margin-top: auto; /* Pushes footer to bottom */
+  padding: 1rem 0;
+  border-top: 3px solid var(--riso-yellow); /* Yellow accent line */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+      gap: 1rem;
+}
+
+.footer-left,
+.footer-right {
+  flex: 1;
+}
+
+.footer-left p,
+.footer-right p {
+  color: var(--navbar-link);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.footer-left p:last-child {
+  margin-bottom: 0;
+}
+
+/* Footer navigation */
+.footer-nav {
+  margin-bottom: 1rem;
+}
+
+.footer-nav a {
+  color: var(--navbar-link);
+  text-decoration: none;
+  margin-right: 1.5rem;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: var(--navbar-link-hover);
+}
+
+/* Footer links */
+.footer-content a {
+  color: var(--navbar-link-active);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-content a:hover {
+  color: var(--navbar-link-hover);
+  text-decoration: underline;
+}
+
+/* Contact link styling */
+.footer-contact a {
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--riso-pink);
+  border-radius: 15px;
+  transition: all 0.2s;
+}
+
+.footer-contact a:hover {
+  background-color: var(--riso-pink);
+  color: white;
+  text-decoration: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+  }
+  
+  .footer-nav a {
+    margin: 0 1rem;
+  }
+  
+  .footer-nav {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .footer-nav a {
+    margin: 0;
   }
 }
