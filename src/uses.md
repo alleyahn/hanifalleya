@@ -3,11 +3,6 @@ layout: layouts/blog-post.njk
 title: Things I Use
 permalink: /uses/
 ---
-
-*Products and tools I genuinely love and recommend. Some links are affiliate links, which means I might earn a small commission if you purchase through them (at no extra cost to you).*
-
-# Things I Use
-
 *Products and tools I genuinely love and recommend. Some links are affiliate links, which means I might earn a small commission if you purchase through them (at no extra cost to you).*
 
 ## Tech & Productivity

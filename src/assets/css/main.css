@@ -496,7 +496,7 @@ nav a.active {
 
 /* Blog post container - narrower and centered */
 .blog-post-container {
-  max-width: 700px; /* Much narrower than before */
+  max-width: 900px; /* Much narrower than before */
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
@@ -590,6 +590,106 @@ nav a.active {
   border-radius: 8px;
   overflow-x: auto;
   margin: 1.5rem 0;
+}
+
+/* --------- BLOG INDEX PAGE STYLES --------- */
+.blog-index-container {
+  max-width: 1200px; /* Wider than single blog posts */
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.blog-layout {
+  display: flex;
+  gap: 3rem; /* Space between columns */
+  align-items: flex-start; /* Align to top */
+}
+
+/* Left column - Blog posts */
+.blog-posts-column {
+  flex: 2; /* Takes up 2/3 of the space */
+  min-width: 0; /* Prevents overflow issues */
+}
+
+.blog-list {
+  /* Your existing blog-list styles will still work */
+}
+
+.blog-preview {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+}
+
+.blog-preview h2 {
+  margin-bottom: 0.5rem;
+}
+
+.blog-preview h2 a {
+  color: var(--heading-color);
+  text-decoration: none;
+}
+
+.blog-preview h2 a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline wavy var(--title-underline-color);
+}
+
+.post-meta {
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.read-more {
+  color: var(--accent-color);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  color: var(--accent-hover);
+}
+
+/* Right column - Tags sidebar */
+.blog-tags-sidebar {
+  flex: 1; /* Takes up 1/3 of the space */
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  height: fit-content; /* Don't stretch to full height */
+  position: sticky; /* Sticks to top when scrolling */
+  top: 2rem; /* Distance from top when sticky */
+}
+
+.blog-tags-sidebar h3 {
+  margin-bottom: 1.5rem;
+  color: var(--heading-color);
+  font-size: 1.3rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 900px) {
+  .blog-layout {
+    flex-direction: column; /* Stack vertically on mobile */
+    gap: 2rem;
+  }
+  
+  .blog-tags-sidebar {
+    position: static; /* Remove sticky on mobile */
+    order: -1; /* Put tags above posts on mobile */
+  }
+  
+  .blog-index-container {
+    padding: 1rem;
+  }
+  
+  .blog-preview {
+    padding: 1.5rem;
+  }
 }
 
 /* Tags section */
@@ -1293,5 +1393,233 @@ nav a.active {
   
   .content-container {
     padding: 20px;
+  }
+}
+
+/* --------- IMPROVED TAGS PAGE STYLES --------- */
+.tags-page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.tags-page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tags-page-header h1 {
+  font-size: 2.5rem;
+  color: var(--heading-color);
+  margin-bottom: 1rem;
+}
+
+.tags-description {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Tags Grid Layout */
+.tags-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Individual Tag Cards */
+.tag-card {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-align: center;
+}
+
+.tag-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-color: var(--accent-color);
+}
+
+.tag-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+}
+
+.tag-count {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.tag-card:hover .tag-name {
+  color: var(--accent-color);
+}
+
+/* Empty state */
+.empty-tags {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .tags-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .tag-card {
+    padding: 1rem;
+  }
+  
+  .tags-page-container {
+    padding: 1rem;
+  }
+}
+
+/* --------- INDIVIDUAL TAG PAGE STYLES --------- */
+.tag-page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.tag-page-header {
+  text-align: center;
+  margin-bottom: 4rem; /* Increased from 3rem */
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+/* Better spacing for content grid */
+.tag-content-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column for cleaner look */
+  gap: 3rem; /* More space between entries */
+  margin-bottom: 3rem;
+}
+
+/* Individual Content Cards - remove the card styling for cleaner look */
+.tag-content-card {
+  background-color: transparent; /* Remove card background */
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+  transition: none;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color); /* Add yellow line at bottom */
+}
+
+.tag-content-card:last-child {
+  border-bottom: none; /* Remove border from last item */
+  padding-bottom: 0;
+}
+
+.tag-content-card:hover {
+  transform: none; /* Remove hover effects */
+  box-shadow: none;
+}
+
+/* Content area - remove padding since no card background */
+.tag-item-content {
+  padding: 0;
+  padding-top: 1.5rem; /* Space above content */
+}
+
+/* Make titles bigger and more prominent */
+.tag-item-content h2 {
+  margin-bottom: 0.8rem;
+  font-size: 1.8rem; /* Bigger titles */
+}
+
+/* Better spacing for meta info */
+.tag-item-meta {
+  margin-top: 1.5rem;
+  padding-top: 0; /* Remove top padding since border is on card */
+  border-top: none; /* Remove border since it's on card */
+}
+
+/* Date styling */
+.tag-item-date {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+/* Excerpt spacing */
+.tag-item-excerpt {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem; /* Slightly bigger text */
+}
+
+/* Empty state */
+.empty-tag-content {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Navigation */
+.tag-navigation {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.back-to-tags {
+  display: inline-block;
+  color: var(--accent-color);
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.back-to-tags:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .tag-content-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .tag-page-container {
+    padding: 1rem;
+  }
+  
+  .tag-item-content {
+    padding: 1rem;
+  }
+  
+  .tag-page-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tag-item-image {
+    height: 150px;
   }
 }

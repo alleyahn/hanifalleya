@@ -3,32 +3,25 @@ layout: layouts/base.njk
 title: Tags
 ---
 
-<!-- Debug info - remove after troubleshooting -->
-<div style="display: none;">
-  <h3>Available Tags:</h3>
-  <ul>
-    {% for tag in collections.tagList %}
-      <li>{{ tag }}</li>
-    {% endfor %}
-  </ul>
+<div class="content-container tags-page-container">
+  <div class="tags-page-header">
+    <h1>All Tags</h1>
+    <p class="tags-description">Browse content by topic. Click any tag to see related posts and images.</p>
+  </div>
   
-  <h3>Tagged Items:</h3>
-  {% for tag, items in collections.taggedItems %}
-    <h4>{{ tag }} ({{ items.length }} items)</h4>
-    <ul>
-      {% for item in items %}
-        <li>{{ item.data.title }}</li>
-      {% endfor %}
-    </ul>
-  {% endfor %}
-</div>
-
-<div class="content-container tags-container">
-  <h1>All Tags</h1>
-  
-  <div class="tags-list">
+  <div class="tags-grid">
     {% for tag in collections.tagList %}
-      <a href="/tags/{{ tag | slug }}/" class="tag-link">{{ tag }}</a>
+      {% if tag != "blog" and tag != "gallery" %}
+        {% set taggedItems = collections.taggedItems[tag] %}
+        <a href="/tags/{{ tag | slug }}/" class="tag-card">
+          <div class="tag-name">{{ tag }}</div>
+          <div class="tag-count">{{ taggedItems.length }} item{% if taggedItems.length != 1 %}s{% endif %}</div>
+        </a>
+      {% endif %}
     {% endfor %}
   </div>
-</div>
+  
+  {% if collections.tagList.length == 0 %}
+    <div class="empty-tags">
+      <p>No tags found yet. Tags will appear here as you add them to your posts and images.</p>
+    </di

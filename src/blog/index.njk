@@ -3,38 +3,55 @@ layout: layouts/base.njk
 title: Blog
 ---
 
-<div class="content-container blog-container">
+<div class="content-container blog-index-container">
   <h1>Blog</h1>
   
-  <div class="blog-list">
-    {% if collections.blog and collections.blog.length > 0 %}
-      {% for post in collections.blog | reverse %}
-        <article class="blog-preview">
-          <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-          <div class="post-meta">
-            <time datetime="{{ post.date | dateIso }}">{{ post.date | dateFormat }}</time>
-          </div>
-          {% if post.data.excerpt %}
-            <p>{{ post.data.excerpt }}</p>
-          {% endif %}
-          
-          {% if post.data.tags and post.data.tags.length > 0 %}
-            <div class="post-tags-preview">
-              <div class="tags-list">
-                {% for tag in post.data.tags %}
-                  {% if tag != "blog" %}
-                    <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
-                  {% endif %}
-                {% endfor %}
+  <div class="blog-layout">
+    <!-- Left column: Blog posts -->
+    <div class="blog-posts-column">
+      <div class="blog-list">
+        {% if collections.blog and collections.blog.length > 0 %}
+          {% for post in collections.blog | reverse %}
+            <article class="blog-preview">
+              <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+              <div class="post-meta">
+                <time datetime="{{ post.date | dateIso }}">{{ post.date | dateFormat }}</time>
               </div>
-            </div>
+              {% if post.data.excerpt %}
+                <p>{{ post.data.excerpt }}</p>
+              {% endif %}
+              
+              {% if post.data.tags and post.data.tags.length > 0 %}
+                <div class="post-tags-preview">
+                  <div class="tags-list">
+                    {% for tag in post.data.tags %}
+                      {% if tag != "blog" %}
+                        <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+              
+              <a href="{{ post.url }}" class="read-more">Read more →</a>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p>No blog posts yet. Check back soon!</p>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Right column: Tags -->
+    <div class="blog-tags-sidebar">
+      <h3>Browse by tags</h3>
+      <div class="tags-list">
+        {% for tag in collections.tagList %}
+          {% if tag != "blog" %}
+            <a href="/tags/{{ tag | slug }}/" class="tag-link">{{ tag }}</a>
           {% endif %}
-          
-          <a href="{{ post.url }}" class="read-more">Read more →</a>
-        </article>
-      {% endfor %}
-    {% else %}
-      <p>No blog posts yet. Check back soon!</p>
-    {% endif %}
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </div>
