@@ -759,6 +759,7 @@ nav a.active {
 /* Gallery Container */
 .vertical-gallery {
   padding-bottom: 40px;
+  max-width: 900px;
 }
 
 .gallery-header {

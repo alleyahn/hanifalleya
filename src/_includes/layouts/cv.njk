@@ -1,0 +1,224 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="content-container cv-container">
+  <div class="cv-content">
+    {{ content | safe }}
+  </div>
+  
+  <div class="cv-actions">
+    <a href="/PIONEER EM 2025_Alleya CV.pdf" class="download-cv" target="_blank">
+      📄 Download PDF Version
+    </a>
+  </div>
+</div>
+
+<style>
+/* CV-specific styles */
+.cv-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.cv-content {
+  background-color: var(--card-bg);
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 2rem;
+  font-family: var(--font-main);
+  line-height: 1.8;
+}
+
+/* Header styling */
+.cv-content h1 {
+  font-size: 2.5rem;
+  color: var(--riso-blue);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cv-content h1 + p {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid var(--riso-yellow);
+}
+
+/* Section headings */
+.cv-content h2 {
+  font-size: 1.5rem;
+  color: var(--riso-teal);
+  margin: 2rem 0 1rem 0;
+  font-weight: 600;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.cv-content h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 100%;
+  background-color: var(--riso-yellow);
+  border-radius: 2px;
+}
+
+/* Job titles and company names */
+.cv-content h3 {
+  color: var(--riso-teal);
+  font-size: 1.3rem;
+  margin: 1.5rem 0 0.5rem 0;
+  font-weight: 600;
+}
+
+/* Company/organization names and dates */
+.cv-content p strong,
+.cv-content strong {
+  background: linear-gradient(120deg, var(--riso-yellow) 0%, var(--riso-yellow) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 85%;
+  padding: 2px 4px;
+  font-weight: 600;
+  color: var(--riso-blue);
+}
+
+/* Emphasized text for roles and dates */
+.cv-content em {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Links */
+.cv-content a {
+  color: var(--riso-teal);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.cv-content a:hover {
+  border-bottom-color: var(--riso-pink);
+}
+
+/* Paragraphs */
+.cv-content p {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Lists */
+.cv-content ul {
+  margin: 1rem 0 1.5rem 2rem;
+}
+
+.cv-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Thesis description styling */
+.cv-content em:has(~ em),
+.cv-content p:has(em) em {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: var(--bg-color);
+  border-left: 4px solid var(--riso-yellow);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+/* Download button */
+.cv-actions {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.download-cv {
+  display: inline-block;
+  background-color: var(--riso-teal);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 184, 196, 0.3);
+}
+
+.download-cv:hover {
+  background-color: var(--riso-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 109, 159, 0.4);
+}
+
+/* Print styles */
+@media print {
+  .cv-container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  .cv-content {
+    box-shadow: none;
+    padding: 1rem;
+    margin: 0;
+  }
+  
+  .cv-actions {
+    display: none;
+  }
+  
+  .cv-content h1 {
+    font-size: 2rem;
+  }
+  
+  .cv-content h2 {
+    font-size: 1.4rem;
+    page-break-after: avoid;
+  }
+  
+  .cv-content h3 {
+    page-break-after: avoid;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .cv-container {
+    padding: 1rem;
+  }
+  
+  .cv-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .cv-content h1 {
+    font-size: 2rem;
+  }
+  
+  .cv-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .cv-content h3 {
+    font-size: 1.2rem;
+  }
+  
+  .cv-content p, 
+  .cv-content li {
+    font-size: 1rem;
+  }
+}
+</style>

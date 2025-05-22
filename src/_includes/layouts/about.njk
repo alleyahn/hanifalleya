@@ -1,0 +1,206 @@
+---
+layout: layouts/base.njk
+---
+
+<style>
+/* Dotted paper styles for about page */
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: calc(100vh - 52px);
+}
+
+.paper-container {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 8.5/11;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 
+    0 4px 12px rgba(27, 94, 125, 0.15),
+    0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-content {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle, rgba(110, 138, 151, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+  padding: 80px 60px 60px 100px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.binder-holes {
+  position: absolute;
+  left: 40px;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+}
+
+.hole {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #666 30%, #999 70%);
+  border-radius: 50%;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  left: 2px;
+}
+
+.hole:nth-child(1) { top: 80px; }
+.hole:nth-child(2) { top: 160px; }
+.hole:nth-child(3) { top: 240px; }
+.hole:nth-child(4) { top: 320px; }
+.hole:nth-child(5) { top: 400px; }
+.hole:nth-child(6) { top: 480px; }
+.hole:nth-child(7) { top: 560px; }
+.hole:nth-child(8) { top: 640px; }
+.hole:nth-child(9) { top: 720px; }
+.hole:nth-child(10) { top: 800px; }
+
+.margin-line {
+  position: absolute;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--riso-pink);
+  box-shadow: 0 0 2px rgba(255, 109, 159, 0.3);
+}
+
+.paper-content-inner {
+  position: relative;
+  z-index: 2;
+  color: var(--text-color);
+}
+
+.paper-content-inner h1 {
+  font-size: 2.5rem;
+  color: var(--riso-blue);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.paper-content-inner h2 {
+  font-size: 1.5rem;
+  color: var(--riso-teal);
+  margin: 2rem 0 1rem 0;
+  font-weight: 600;
+}
+
+.paper-content-inner p {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.paper-content-inner ul {
+  margin: 1rem 0 1.5rem 2rem;
+}
+
+.paper-content-inner li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Handwritten style for blockquotes */
+.paper-content-inner blockquote {
+  font-family: 'Courier New', monospace;
+  background: rgba(255, 186, 0, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--riso-yellow);
+  margin: 1.5rem 0;
+  transform: rotate(-0.3deg);
+  color: var(--riso-blue);
+  font-size: 1rem;
+  font-style: normal;
+}
+
+/* Highlight effect for strong text */
+.paper-content-inner strong {
+  background: linear-gradient(120deg, var(--riso-yellow) 0%, var(--riso-yellow) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 85%;
+  padding: 2px 4px;
+  font-weight: 600;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1rem;
+  }
+  
+  .paper-container {
+    aspect-ratio: 8.5/12;
+  }
+  
+  .paper-content {
+    padding: 60px 40px 40px 80px;
+  }
+  
+  .paper-content-inner h1 {
+    font-size: 2rem;
+  }
+  
+  .paper-content-inner h2 {
+    font-size: 1.3rem;
+  }
+  
+  .paper-content-inner p, 
+  .paper-content-inner li {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .paper-content {
+    padding: 50px 30px 30px 70px;
+  }
+  
+  .margin-line {
+    left: 60px;
+  }
+  
+  .binder-holes {
+    left: 30px;
+  }
+}
+</style>
+
+<div class="about-container">
+  <div class="paper-container">
+    <div class="paper-content">
+      <div class="binder-holes">
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+      </div>
+      <div class="margin-line"></div>
+      
+      <div class="paper-content-inner">
+        <h1>{{ title }}</h1>
+        {{ content | safe }}
+      </div>
+    </div>
+  </div>
+</div>
