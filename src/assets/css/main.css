@@ -499,7 +499,7 @@ nav a.active {
   margin-top: 6px;
 }
 
-/*Cbox */
+/*Chatbox */
 .cbox-section {
   background-color: var(--sidebar-card-bg);
   padding: 25px;
@@ -510,9 +510,16 @@ nav a.active {
   width: 100%; /* Ensure it takes full width of sidebar */
   margin-left: 0;
   margin-right: 0;
-  font-family: 'Mogra', cursive; /* card title */
 }
 
+.cbox-section h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700; /* Make headings bolder */
+  color: var(--text-color);
+  letter-spacing: 0.5px; /* Improve spacing between letters */
+  font-family: 'Mogra', cursive; /* card title */
+}
 
 /* Currently listening */
 .currently-listening {
