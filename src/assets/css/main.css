@@ -392,8 +392,11 @@ nav a.active {
   padding: 30px 50px 30px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: auto;
+  /* NEW: Make sidebar scrollable */
+  overflow-y: auto;
+  height: 100%;
+  gap: 30px; /* Add consistent spacing between sections */
 }
 
 /* Latest entries - with stacked postcard effect */
@@ -495,6 +498,21 @@ nav a.active {
   line-height: 1.5; /* More spacing between lines */
   margin-top: 6px;
 }
+
+/*Cbox */
+.cbox-section {
+  background-color: var(--sidebar-card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ensure it takes full width of sidebar */
+  margin-left: 0;
+  margin-right: 0;
+  font-family: 'Mogra', cursive; /* card title */
+}
+
 
 /* Currently listening */
 .currently-listening {
@@ -780,31 +798,160 @@ nav a.active {
   color: white;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .blog-post-container {
+/* Find this section in your main.css and REPLACE the existing mobile styles */
+
+@media (max-width: 900px) {
+  /* Make body scrollable on mobile */
+  body {
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+  
+  /* Layout changes - stack vertically */
+  .main-container {
+    flex-direction: column;
+    height: auto; /* Allow natural height */
+    overflow-y: visible; /* Allow scrolling */
+  }
+  
+  /* Featured image - SHORTER on mobile */
+  .featured-image {
+    height: 40vh; /* Reduced from 50vh - makes it shorter */
+    flex: none;
     max-width: 100%;
-    padding: 1rem;
+    position: relative; /* Remove any fixed positioning */
   }
   
-  .blog-post {
-    padding: 2rem 1.5rem;
+  /* Sidebar - full width on mobile */
+  .sidebar {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    padding: 20px;
+    height: auto; /* Allow natural height */
+    overflow-y: visible; /* Remove scroll constraint */
+    gap: 20px; /* Smaller gap on mobile */
   }
   
-  .blog-post-header h1 {
-    font-size: 1.8rem;
+  /* Name overlay adjustments */
+  .name-overlay {
+    left: 30px;
   }
   
-  .post-content {
-    font-size: 1rem;
+  .name-overlay h1 {
+    font-size: 42px;
   }
   
-  .post-content h2 {
-    font-size: 1.4rem;
+  /* Gallery adjustments */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 15px 20px;
+    gap: 20px;
   }
   
-  .post-content h3 {
-    font-size: 1.2rem;
+  .gallery-grid .gallery-item {
+    height: 350px;
+  }
+  
+  .gallery-header {
+    padding: 15px 20px;
+  }
+  
+  /* Modal adjustments */
+  .modal-content {
+    width: 95%;
+  }
+  
+  .modal-image-container {
+    height: 60vh;
+  }
+  
+  .modal-navigation {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .modal-prev {
+    left: 10px;
+  }
+  
+  .modal-next {
+    right: 10px;
+  }
+  
+  /* Ensure sections are properly spaced on mobile */
+  .latest-entries,
+  .status-section,
+  .cbox-section,
+  .currently-listening {
+    margin-bottom: 0; /* Remove individual margins, use gap instead */
+  }
+  
+  /* Reduce cbox height on mobile for better proportion */
+  .cbox-section iframe {
+    height: 350px; /* Smaller than desktop's 450px */
+  }
+}
+
+/* Extra mobile adjustments for very small screens */
+@media (max-width: 600px) {
+  /* Even shorter featured image on very small screens */
+  .featured-image {
+    height: 35vh; /* Even shorter */
+  }
+  
+  /* Typography scaling */
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+  }
+  
+  .decorative-heading {
+    font-size: 24px;
+  }
+  
+  /* Home page adjustments */
+  .name-overlay h1 {
+    font-size: 36px;
+  }
+  
+  .name-overlay p {
+    font-size: 18px;
+  }
+  
+  /* Sidebar padding */
+  .sidebar {
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  /* Section padding */
+  .latest-entries,
+  .status-section,
+  .cbox-section,
+  .currently-listening {
+    padding: 20px;
+  }
+  
+  /* Even smaller cbox on tiny screens */
+  .cbox-section iframe {
+    height: 300px;
+  }
+  
+  /* Container adjustments */
+  .container, .container-wide {
+    padding: 0 1rem;
+  }
+  
+  .content-container {
+    padding: 20px;
   }
 }
 
