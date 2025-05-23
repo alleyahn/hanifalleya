@@ -525,6 +525,30 @@ nav a.active {
   width: 100%;
 }
 
+/* 8. BLOG */
+
+/* Fix for long headings in blog posts */
+.blog-post-header h1,
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  /* These properties ensure headings wrap properly */
+  word-wrap: break-word;        /* Breaks long words if needed */
+  overflow-wrap: break-word;    /* Modern version of word-wrap */
+  hyphens: auto;               /* Adds hyphens when breaking words */
+  max-width: 100%;             /* Never exceed container width */
+  /* Keep your existing heading styles */
+}
+
+/* Extra safety for the main blog title */
+.blog-post-header h1 {
+  line-height: 1.2;            /* Tighter line spacing for long titles */
+}
+
+
 /* Blog post container - narrower and centered */
 .blog-post-container {
   max-width: 900px; /* Much narrower than before */
@@ -1716,12 +1740,57 @@ nav a.active {
   }
 }
 
+/* Status Cafe widget styling - matches your site design */
+#statuscafe {
+    padding: 25px;
+    background-color: var(--card-bg); /* Uses your site's card background color */
+    border: none; /* Remove the plain border */
+    border-radius: 12px; /* Rounded corners like your other cards */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); /* Same shadow as your cards */
+    position: relative;
+    z-index: 1;
+}
+
+
+/* Style the status section container */
+.status-section {
+    background-color: transparent; /* No background since #statuscafe has it */
+    padding: 0; /* No padding since #statuscafe has it */
+    border-radius: 0;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.status-section h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: 0.5px;
+    font-family: 'Mogra', cursive; /* Same decorative font as your other section headers */
+    padding-left: 25px; /* Align with the card content */
+}
+
+
 /* --------- FOOTER STYLES --------- */
 .site-footer {
   background-color: var(--nav-bg); /* Same as your navigation */
   margin-top: auto; /* Pushes footer to bottom */
-  padding: 1rem 0;
+  padding: 0.8rem 0; /* Even smaller padding */
   border-top: 3px solid var(--riso-yellow); /* Yellow accent line */
+}
+
+/* Fix for gallery page - ensure body uses flexbox */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make sure main content grows to fill space */
+.content-container,
+.gallery-container {
+  flex: 1;
 }
 
 .footer-content {
@@ -1731,7 +1800,7 @@ nav a.active {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-      gap: 1rem;
+      gap: 0.8rem;
 }
 
 .footer-left,

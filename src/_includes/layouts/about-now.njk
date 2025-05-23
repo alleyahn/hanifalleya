@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="content-container blog-post-container">
+  <article class="blog-post">
+    <header class="blog-post-header">
+      <h1>{{ title }}</h1>
+    </header>
+    
+    <div class="post-content">
+      {{ content | safe }}
+    </div>
+
+    {% if tags and tags.length > 0 %}
+      <div class="post-tags">
+        <h3>Tags:</h3>
+        <div class="tags-list">
+          {% for tag in tags %}
+            {% if tag != "blog" %}
+              <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </article>
+  
+</div>

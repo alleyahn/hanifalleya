@@ -1,8 +1,19 @@
 ---
-layout: layouts/about.njk
-title: What I'm up to now
+layout: layouts/about-now.njk
+title: What is she up to?
 permalink: /now/
 ---
+
+<!-- NEW: Status Cafe section -->
+<div class="status-section">
+  <div class="status-widget">
+    <div id="statuscafe">
+      <div id="statuscafe-username"></div>
+      <div id="statuscafe-content"></div>
+    </div>
+    <script src="https://status.cafe/current-status.js?name=hanifalleya" defer></script>
+  </div>
+</div>
 
 *Last updated: May 2025*
 
