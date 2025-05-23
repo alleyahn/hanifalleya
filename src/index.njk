@@ -1,104 +1,107 @@
 ---
 layout: layouts/base.njk
 title: Home
+bodyClass: masonry-homepage
 ---
 
-<!-- Debug Info -->
-<div style="display: none;">
-  <p>Featured images count: {{ collections.featuredImage.length }}</p>
-  {% if collections.featuredImage.length > 0 %}
-    {% set featImg = collections.featuredImage[0] %}
-    <p>Featured image: {{ featImg.data.title }}</p>
-    <p>Featured status: {{ featImg.data.featured }}</p>
-    <p>Image path: {{ featImg.data.image }}</p>
-  {% endif %}
-  
-  <p>All gallery items:</p>
-  {% for item in collections.gallery %}
-    <p>{{ item.data.title }} - Featured: {{ item.data.featured }}</p>
-  {% endfor %}
-</div>
-
-<!-- Main content container -->
-<div class="main-container">
-
-  <!-- Featured image section - showing featured or latest gallery image -->
-  <div class="featured-image">
-    {% if collections.featuredImage.length > 0 %}
-      {% set featImg = collections.featuredImage[0] %}
-      <img src="{{ featImg.data.image }}" alt="{{ featImg.data.alt or featImg.data.title }}">
-      <div class="image-meta">
-        {% if featImg.data.location %}{{ featImg.data.location }}{% endif %}
-        {% if featImg.data.location and featImg.date %} • {% endif %}
-        {% if featImg.date %}{{ featImg.date | dateFormat }}{% endif %}
-      </div>
-    {% else %}
-      <!-- Placeholder if no images exist yet -->
-      <img src="/assets/images/sample.jpg" alt="Featured photograph">
-      <div class="image-meta">
-        Add photos to your gallery to see them featured here
-      </div>
-    {% endif %}
+<!-- Main Masonry Layout -->
+<div class="creative-desk">
+  <div class="masonry-grid">
     
-    <!-- Name overlay -->
-    <div class="name-overlay">
-      <h1 data-text="{{ site.name }}">{{ site.name }}</h1>
-      <p>{{ site.tagline }}</p>
-    </div>
-  </div>
-  
-<!-- Replace your sidebar section with this -->
-<div class="sidebar">
-  <!-- Latest entries -->
-  <div class="latest-entries">
-    <h2>On my mind lately...</h2>
-    
-    {% if collections.latestPosts.length > 0 %}
-      {% for post in collections.latestPosts %}
-        <div class="entry">
-          <h3>
-            <a href="{{ post.url }}">{{ post.data.title }} | {{ post.date | dateFormat }}</a>
-          </h3>
-          <p>{{ post.data.excerpt }}</p>
+    <!-- Hero Name Card with Status -->
+    <div class="desk-item hero-card">
+      <div class="hero-content">
+          <h1 data-text="{{ site.name }}">{{ site.name }}</h1>        <div class="subtitle">
+          <a href="/about">About</a> - <a href="/now">Now</a>
         </div>
-      {% endfor %}
-    {% else %}
-      <!-- Placeholder entries if no blog posts exist yet -->
-      <div class="entry">
-        <h3>Welcome to my website | {{ page.date | dateFormat }}</h3>
-        <p>This is a placeholder until you add blog posts</p>
       </div>
-    {% endif %}
-  </div>
+      <div class="status-inline">
+        <div id="statuscafe-inline">
+          <div id="statuscafe-username-inline"></div>
+          <div id="statuscafe-content-inline"></div>
+        </div>
+       
 
-  <!-- Status Cafe section -->
-  <div class="status-section">
-    <h2>Latest status</h2>
-    <div class="status-widget">
-      <div id="statuscafe">
-        <div id="statuscafe-username"></div>
-        <div id="statuscafe-content"></div>
+<div id="statuscafe"><div id="statuscafe-username"></div><div id="statuscafe-content"></div></div><script src="https://status.cafe/current-status.js?name=hanifalleya" defer></script>
+      
       </div>
-      <script src="https://status.cafe/current-status.js?name=hanifalleya" defer></script>
     </div>
-  </div>
 
-  <!-- Cbox section -->
-  <div class="cbox-section">
-    <h2>Chat with me!</h2>
-    <iframe src="https://www5.cbox.ws/box/?boxid=956980&boxtag=1s5lqt" 
-            width="100%" 
-            height="300" 
-            allowtransparency="yes" 
-            allow="autoplay" 
-            frameborder="0" 
-            marginheight="0" 
-            marginwidth="0" 
-            scrolling="auto">
-    </iframe>
-  </div>
+    <!-- Latest Blog Posts -->
+    <div class="desk-item blog-item">
+      <div class="blog-label">On my mind lately..</div>
+      <div class="blog-posts-list">
+        {% if collections.latestPosts and collections.latestPosts.length > 0 %}
+          {% for post in collections.latestPosts %}
+            <div class="blog-post-item">
+              <h4><a href="{{ post.url }}">{{ post.data.title }}</a></h4>
+              <div class="blog-post-date">{{ post.date | dateFormat }}</div>
+              {% if post.data.excerpt %}
+                <div class="blog-post-excerpt">{{ post.data.excerpt }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <!-- Fallback if no posts -->
+          <div class="blog-post-item">
+            <h4>Welcome to my website</h4>
+            <div class="blog-post-date">{{ page.date | dateFormat }}</div>
+            <div class="blog-post-excerpt">More blog posts coming soon...</div>
+          </div>
+        {% endif %}
+      </div>
+      <a href="/blog" class="see-more-btn">See more posts →</a>
+    </div>
 
-  
+   <!-- Featured Postcard -->
+<div class="desk-item postcard-item">
+  <div class="postcard-label">Featured postcard</div>
+  {% if collections.featuredImage and collections.featuredImage.length > 0 %}
+    {% set featImg = collections.featuredImage[0] %}
+    <div class="postcard-front">
+      <a href="/gallery">
+        <img src="{{ featImg.data.image }}" alt="{{ featImg.data.alt or featImg.data.title }}" class="postcard-image">
+        <div class="postcard-date">{{ featImg.date | dateFormat }}</div>
+      </a>
+    </div>
+      {% else %}
+        <!-- Fallback if no gallery images -->
+        <div class="postcard-front">
+          <div style="background: linear-gradient(135deg, rgba(255, 109, 159, 0.2), rgba(0, 176, 196, 0.2)); height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-radius: 12px;">
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; margin-bottom: 10px;">📸</div>
+              <div>Add photos to gallery</div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Chatbox -->
+    <div class="desk-item chat-item">
+      <h3>Guestbook 💬</h3>
+      <div class="chat-content">
+        <iframe src="https://www5.cbox.ws/box/?boxid=956980&boxtag=1s5lqt" 
+                width="100%" 
+                height="100%" 
+                allowtransparency="yes" 
+                allow="autoplay" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0" 
+                scrolling="auto"
+                style="border-radius: 8px;">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- More Pages Navigation -->
+    <div class="desk-item nav-links-item">
+      <h3>Oddly specific pages</h3>
+      <ul class="nav-list">
+        <li><a href="/uses">Uses</a></li>
+      </ul>
+    </div>
+
   </div>
 </div>
-

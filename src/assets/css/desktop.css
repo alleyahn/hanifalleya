@@ -1,0 +1,556 @@
+/* ===========================================
+   DESKTOP HOMEPAGE Y2K STYLES
+   File: src/assets/css/desktop.css
+   =========================================== */
+
+/* Only apply these styles to the desktop homepage */
+body.desktop-home {
+    font-family: 'Sono', sans-serif;
+    background: #f7f5f0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Static riso-inspired background layers */
+.desktop-home .background-layers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.desktop-home .bg-layer {
+    position: absolute;
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+}
+
+.desktop-home .layer-1 {
+    top: 15%;
+    left: 8%;
+    width: 280px;
+    height: 180px;
+    background: #ff6d9f;
+    border-radius: 20px;
+    transform: rotate(-2deg);
+}
+
+.desktop-home .layer-2 {
+    top: 35%;
+    right: 12%;
+    width: 220px;
+    height: 160px;
+    background: #ffba00;
+    border-radius: 15px;
+    transform: rotate(3deg);
+}
+
+.desktop-home .layer-3 {
+    bottom: 30%;
+    left: 25%;
+    width: 180px;
+    height: 140px;
+    background: #00b0c4;
+    border-radius: 25px;
+    transform: rotate(-1deg);
+}
+
+.desktop-home .layer-4 {
+    bottom: 15%;
+    right: 25%;
+    width: 160px;
+    height: 110px;
+    background: #15a04b;
+    border-radius: 10px;
+    transform: rotate(2deg);
+}
+
+/* Subtle texture overlay */
+.desktop-home .texture-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    background-image: 
+        radial-gradient(circle at 2px 2px, #103749 1px, transparent 0);
+    background-size: 20px 20px;
+    z-index: 2;
+}
+
+/* Desktop workspace - 2x2 grid layout with max width */
+.desktop-home .desktop-workspace {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1200px; /* Max width constraint */
+    height: calc(100vh - 50px);
+    padding: 20px;
+    margin: 0 auto; /* Center the workspace */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Window tabs - riso style with max width constraint */
+.desktop-home .window-tab {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 2px 8px rgba(27, 94, 125, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    max-width: 500px; /* Constrain individual window width */
+    height: 400px; /* Constrain individual window width */
+    justify-self: center; /* Center each window in its grid cell */
+}
+
+.desktop-home .window-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 4px 12px rgba(27, 94, 125, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Riso-inspired borders */
+.desktop-home .window-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-color, #ff6d9f);
+    opacity: 0.7;
+}
+
+.desktop-home .tab-blog { --accent-color: #ff6d9f; }
+.desktop-home .tab-about { --accent-color: #00b0c4; }
+.desktop-home .tab-sitemap { 
+    --accent-color: #15a04b;
+    max-width: 520px !important;
+}
+
+/* Window headers */
+.desktop-home .window-header {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(255, 186, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #103749;
+}
+
+.desktop-home .window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.desktop-home .window-control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.desktop-home .close { background: #ff6d9f; }
+.desktop-home .minimize { background: #ffba00; }
+.desktop-home .maximize { background: #00b0c4; }
+
+/* Window content with improved readability */
+.desktop-home .window-content {
+    padding: 20px 15px;
+    color: #103749;
+    font-size: 14px;
+    line-height: 1.6; /* Improved line height */
+    height: calc(100% - 45px);
+    overflow-y: auto;
+    max-width: 100%; /* Prevent text from stretching too wide */
+}
+
+.desktop-home .window-content h3 {
+    color: #1b5e7d;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.desktop-home .window-content h4 {
+    color: #6e8a97;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.desktop-home .content-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    border-left: 3px solid var(--accent-color, #ff6d9f);
+}
+
+.desktop-home .content-item strong {
+    color: #1b5e7d;
+    font-weight: 600;
+}
+
+.desktop-home .content-item strong a {
+    color: #1b5e7d;
+    text-decoration: none;
+}
+
+.desktop-home .content-item strong a:hover {
+    color: #ff6d9f;
+    text-decoration: underline;
+}
+
+.desktop-home .content-item small {
+    color: #6e8a97;
+    font-style: italic;
+}
+
+.desktop-home .view-all-link {
+    color: #00b0c4;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 12px;
+    background: rgba(0, 176, 196, 0.1);
+    transition: all 0.2s ease;
+}
+
+.desktop-home .view-all-link:hover {
+    background: rgba(0, 176, 196, 0.2);
+    transform: translateY(-1px);
+}
+
+/* About window with profile and links */
+.desktop-home .about-profile {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 176, 196, 0.2);
+}
+
+.desktop-home .profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #00b0c4, #1b5e7d);
+    margin: 0 auto 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    font-weight: 600;
+}
+
+.desktop-home .profile-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.desktop-home .profile-link {
+    background: rgba(0, 176, 196, 0.1);
+    color: #00b0c4;
+    padding: 5px 12px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(0, 176, 196, 0.2);
+    transition: all 0.2s ease;
+}
+
+.desktop-home .profile-link:hover {
+    background: rgba(0, 176, 196, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Status indicators */
+.desktop-home .status-indicator {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 2px;
+}
+
+.desktop-home .status-online {
+    background: rgba(21, 160, 75, 0.2);
+    color: #15a04b;
+    border: 1px solid rgba(21, 160, 75, 0.3);
+}
+
+.desktop-home .status-creating {
+    background: rgba(255, 109, 159, 0.2);
+    color: #ff6d9f;
+    border: 1px solid rgba(255, 109, 159, 0.3);
+}
+
+/* Status Cafe Integration */
+.desktop-home #statuscafe {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: 1px solid rgba(0, 176, 196, 0.2);
+}
+
+.desktop-home #statuscafe-username {
+    font-weight: 600;
+    color: #00b0c4;
+    margin-bottom: 4px;
+}
+
+.desktop-home #statuscafe-content {
+    color: #103749;
+    font-style: italic;
+}
+
+/* Floating Postcard - no window styling */
+.desktop-home .floating-postcard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.desktop-home .floating-postcard::before {
+    display: none; /* Remove colored border */
+}
+
+.desktop-home .featured-postcard {
+    width: 280px;
+    aspect-ratio: 6/4;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 3px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    background: white;
+    border: 8px solid white;
+}
+
+.desktop-home .featured-postcard:hover {
+    transform: translateY(-8px) rotate(1deg);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.desktop-home .featured-postcard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.desktop-home .postcard-back-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-family: 'Shantell Sans', cursive;
+    backdrop-filter: blur(3px);
+}
+
+.desktop-home .postcard-stamp {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 35px;
+    background: rgba(255, 186, 0, 0.9);
+    border: 2px solid white;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.desktop-home .postcard-date {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #103749;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Sitemap/Links window */
+.desktop-home .sitemap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.desktop-home .sitemap-link {
+    background: rgba(21, 160, 75, 0.05);
+    color: #15a04b;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid rgba(21, 160, 75, 0.1);
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.desktop-home .sitemap-link:hover {
+    background: rgba(21, 160, 75, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Subtle animations */
+.desktop-home .window-tab {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.desktop-home .window-tab:nth-child(1) { animation-delay: 0.1s; }
+.desktop-home .window-tab:nth-child(2) { animation-delay: 0.2s; }
+.desktop-home .window-tab:nth-child(3) { animation-delay: 0.3s; }
+.desktop-home .window-tab:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsive - stack vertically */
+@media (max-width: 768px) {
+    body.desktop-home {
+        overflow-y: auto;
+        height: auto;
+    }
+    
+    .desktop-home .desktop-workspace {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        padding-bottom: 70px;
+    }
+    
+    .desktop-home .window-tab {
+        min-height: 250px;
+    }
+    
+    .desktop-home .featured-postcard {
+        width: 240px;
+        transform: rotate(-1deg);
+    }
+    
+    .desktop-home .sitemap-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .desktop-home .background-layers .bg-layer {
+        opacity: 0.08;
+    }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1400px) {
+    .desktop-home .desktop-workspace {
+        max-width: 1400px; /* Slightly larger max width for very large screens */
+        gap: 30px; /* More breathing room */
+    }
+    
+    .desktop-home .window-content {
+        padding: 25px 20px; /* More comfortable padding */
+        font-size: 15px; /* Slightly larger text */
+    }
+    
+    .desktop-home .featured-postcard {
+        width: 320px; /* Larger postcard on big screens */
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1800px) {
+    .desktop-home .desktop-workspace {
+        max-width: 1600px; /* Even larger constraint for ultra-wide screens */
+        gap: 40px;
+    }
+    
+    .desktop-home .window-content {
+        padding: 30px 25px;
+        font-size: 16px;
+    }
+}
+@media (max-width: 480px) {
+    .desktop-home .desktop-workspace {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .desktop-home .window-content {
+        padding: 15px 10px;
+        font-size: 13px;
+    }
+    
+    .desktop-home .window-header {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    .desktop-home .featured-postcard {
+        width: 200px;
+        transform: rotate(-1deg);
+    }
+    
+    .desktop-home .profile-links {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Force sitemap window width */
+.desktop-home .window-tab.tab-sitemap {
+    max-width: 520px !important;
+}

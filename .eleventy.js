@@ -44,7 +44,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("latestPosts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/blog/*.md")
       .sort((a, b) => b.date - a.date)
-      .slice(0, 3);
+      .slice(0, 2);
   });
 
   // Gallery collection

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }} @ {% endif %}{{ site.title }}</title>
   <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <!-- Include desktop homepage styles only for the home page -->
+  {% if bodyClass == 'desktop-home' %}
+  <link rel="stylesheet" href="/assets/css/desktop.css">
+  {% endif %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,40 +25,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 
-
-<body{% if page.url != '/' %} class="scrollable-page{% if bodyClass %} {{ bodyClass }}{% endif %}"{% endif %}>
+<body{% if bodyClass %} class="{{ bodyClass }}{% if page.url != '/' %} scrollable-page{% endif %}"{% elif page.url != '/' %} class="scrollable-page"{% endif %}>
 
   <script src="/assets/js/site-name.js"></script>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="/">Home</a> |
-    <a href="/blog">Blog</a> |
-    <a href="/gallery">Postcards</a> |
-    <a href="/about">Me</a>
-  </nav>
+<!-- Navigation -->
+{% if bodyClass != "masonry-homepage" %}
+<nav>
+  <a href="/">Home</a> |
+  <a href="/blog">Blog</a> |
+  <a href="/gallery">Postcards</a> |
+  <a href="/about">Me</a>
+</nav>
+{% endif %}
   
   <!-- Main content -->
   {{ content | safe }}
 
-<!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-left">
-        <p>&copy; {{ site.name }} • 2025</p>
-        <p>Made with ❤️ using <a href="https://www.11ty.dev/" target="_blank">Eleventy</a></p>
-      </div>
-      <div class="footer-right">
-        <nav class="footer-nav">
-          <a href="/uses">Uses</a>
-          <a href="/cv">CV</a>
-          <a href="/now">Now</a>
-          <a href="/tags">Tags</a>
-        </nav>
-      </div>
+ <footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <p>&copy; {{ site.name }} • 2025</p>
+      <p>Made with ❤️ using <a href="https://www.11ty.dev/" target="_blank">Eleventy</a></p>
     </div>
-  </footer>
-  
+  </div>
+</footer>
 
 </body>
 </html>
