@@ -24,20 +24,68 @@
 
   <script src="/assets/js/site-name.js"></script>
 
-<!-- Navigation -->
-{% if bodyClass != "masonry-homepage" %}
-<nav>
-  <a href="/">Home</a> |
-  <a href="/blog">Blog</a> |
-  <a href="/gallery">Postcards</a> |
-  <a href="/about">Me</a>
-</nav>
+<!-- Clean Breadcrumb Navigation - Only show if not homepage -->
+{% if page.url != '/' %}
+<div class="breadcrumb-nav">
+  <div class="breadcrumb-container">
+    <a href="/" class="breadcrumb-link">Home</a>
+    
+    {% if page.url == '/blog/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">Blog</span>
+    {% elif page.url == '/gallery/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">Postcards</span>
+    {% elif page.url == '/tea/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">Tea</span>
+    {% elif page.url == '/about/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">About</span>
+    {% elif page.url == '/cv/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">CV</span>
+    {% elif page.url == '/uses/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">Uses</span>
+    {% elif page.url == '/now/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">Now</span>
+    {% elif '/blog/' in page.url and page.url != '/blog/' %}
+      <span class="breadcrumb-separator">></span>
+      <a href="/blog/" class="breadcrumb-link">Blog</a>
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">{{ title }}</span>
+    {% elif '/gallery/' in page.url and page.url != '/gallery/' %}
+      <span class="breadcrumb-separator">></span>
+      <a href="/gallery/" class="breadcrumb-link">Postcards</a>
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">{{ title }}</span>
+    {% elif '/tea/' in page.url and page.url != '/tea/' %}
+      <span class="breadcrumb-separator">></span>
+      <a href="/tea/" class="breadcrumb-link">Tea</a>
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">{{ brand }} - {{ variant }}</span>
+    {% elif '/tags/' in page.url and page.url == '/tags/' %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">Tags</span>
+    {% elif '/tags/' in page.url and tag %}
+      <span class="breadcrumb-separator">></span>
+      <a href="/tags/" class="breadcrumb-link">Tags</a>
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">{{ tag }}</span>
+    {% else %}
+      <span class="breadcrumb-separator">></span>
+      <span class="breadcrumb-current">{{ title }}</span>
+    {% endif %}
+  </div>
+</div>
 {% endif %}
   
   <!-- Main content -->
   {{ content | safe }}
 
- <footer class="site-footer">
+<footer class="site-footer">
   <div class="footer-content">
     <div class="footer-left">
       <p>&copy; {{ site.name }} • 2025</p>

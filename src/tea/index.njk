@@ -1,0 +1,106 @@
+---
+layout: layouts/base.njk
+title: Tea Collection
+bodyClass: tea-gallery-page
+---
+
+<div class="tea-gallery-container">
+  <div class="tea-gallery-header">
+    <h1>Tea Tags Collection</h1>
+    <p class="tea-description">I love tea and appreciate pretty designs. The next logical step is collecting tea tags, no?</p>
+  </div>
+  
+<!-- Filter Buttons -->
+<div class="tea-filters-compact">
+  <div class="filter-row">
+    <div class="filter-type-group">
+      <span class="filter-label">Type:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      {% for type in collections.teaTypes %}
+        <button class="filter-btn" data-filter="{{ type }}">{{ type | title }}</button>
+      {% endfor %}
+    </div>
+    
+    <div class="filter-country-group">
+      <span class="filter-label">Country:</span>
+      <select class="country-dropdown" id="country-filter">
+        <option value="all">All</option>
+        {% for country in collections.teaCountries %}
+          <option value="{{ country | slug }}">{{ country }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
+  
+  <!-- Tea Grid -->
+  <div class="tea-grid">
+    {% for tea in collections.tea | reverse %}
+      <div class="tea-card" 
+           data-type="{{ tea.data.teaType }}"
+           data-country="{{ tea.data.country }}">
+        <a href="{{ tea.url }}" class="tea-link">
+          <div class="tea-image">
+            <img src="{{ tea.data.image }}" alt="{{ tea.data.alt or (tea.data.brand + ' ' + tea.data.variant) }}">
+            <!-- Hover overlay with metadata -->
+            <div class="tea-overlay">
+              <h3>{{ tea.data.brand }}</h3>
+              <h4>{{ tea.data.variant }}</h4>
+              <div class="tea-meta">
+                <span class="type">{{ tea.data.teaType | title }}</span>
+                <span class="country">{{ tea.data.country }}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+// Enhanced filter functionality with both type and country
+document.addEventListener('DOMContentLoaded', function() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const countryDropdown = document.getElementById('country-filter');
+  const teaCards = document.querySelectorAll('.tea-card');
+  
+  let currentTypeFilter = 'all';
+  let currentCountryFilter = 'all';
+  
+  function filterTeas() {
+    teaCards.forEach(card => {
+      const cardType = card.getAttribute('data-type');
+      const cardCountry = card.getAttribute('data-country').toLowerCase().replace(/\s+/g, '-');
+      
+      const typeMatch = currentTypeFilter === 'all' || cardType === currentTypeFilter;
+      const countryMatch = currentCountryFilter === 'all' || cardCountry === currentCountryFilter;
+      
+      if (typeMatch && countryMatch) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+  
+  // Type filter buttons
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      
+      currentTypeFilter = this.getAttribute('data-filter');
+      filterTeas();
+    });
+  });
+  
+  // Country dropdown
+  if (countryDropdown) {
+    countryDropdown.addEventListener('change', function() {
+      currentCountryFilter = this.value;
+      filterTeas();
+    });
+  }
+});
+</script>

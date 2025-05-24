@@ -68,6 +68,33 @@ module.exports = function(eleventyConfig) {
     }
   });
 
+  // Tea collection
+eleventyConfig.addCollection("tea", function(collectionApi) {
+  return collectionApi.getFilteredByGlob("src/tea/*.md");
+});
+
+// Get unique tea types for filtering
+eleventyConfig.addCollection("teaTypes", function(collectionApi) {
+  const typesSet = new Set();
+  collectionApi.getFilteredByGlob("src/tea/*.md").forEach(item => {
+    if (item.data.teaType) {
+      typesSet.add(item.data.teaType);
+    }
+  });
+  return Array.from(typesSet).sort();
+});
+
+// Get unique tea countries for filtering
+eleventyConfig.addCollection("teaCountries", function(collectionApi) {
+  const countriesSet = new Set();
+  collectionApi.getFilteredByGlob("src/tea/*.md").forEach(item => {
+    if (item.data.country) {
+      countriesSet.add(item.data.country);
+    }
+  });
+  return Array.from(countriesSet).sort();
+});
+
   // Get all unique tags
   eleventyConfig.addCollection("tagList", function(collectionApi) {
     const tagsSet = new Set();

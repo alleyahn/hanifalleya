@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="content-container tea-item-container">
+  <div class="tea-item-header">
+    <h1>{{ brand }} - {{ variant }}</h1>
+    <div class="tea-item-meta">
+      <span class="tea-type">{{ teaType }}</span>
+      <span class="tea-country">{{ country }}</span>
+    </div>
+  </div>
+  
+  <div class="tea-image-container">
+    <img src="{{ image }}" alt="{{ alt or (brand + ' ' + variant) }}">
+  </div>
+  
+  <div class="tea-description">
+    {{ content | safe }}
+  </div>
+  
+  {% if brewingNotes %}
+    <div class="brewing-notes">
+      <h3>Brewing Notes</h3>
+      <p>{{ brewingNotes }}</p>
+    </div>
+  {% endif %}
+
+  <div class="tea-navigation">
+    <a href="/tea">← Back to Tea Collection</a>
+  </div>
+</div>
