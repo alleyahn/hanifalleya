@@ -22,7 +22,58 @@
 
 <body{% if bodyClass %} class="{{ bodyClass }}{% if page.url != '/' %} scrollable-page{% endif %}"{% elif page.url != '/' %} class="scrollable-page"{% endif %}>
 
-  <script src="/assets/js/site-name.js"></script>
+  <script src="/assets/js/site-name.js">
+  
+  // Copy button functionality for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click event to all code blocks
+  const codeBlocks = document.querySelectorAll('.post-content pre');
+  
+  codeBlocks.forEach(block => {
+    block.addEventListener('click', function(e) {
+      // Only trigger if clicking the copy area (top-right)
+      const rect = this.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      
+      // Check if click is in top-right area (copy button zone)
+      if (clickX > rect.width - 80 && clickY < 40) {
+        const code = this.querySelector('code');
+        const text = code ? code.textContent : this.textContent;
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(text).then(() => {
+          // Change button text temporarily
+          const originalContent = this.style.getPropertyValue('--copy-text') || 'Copy';
+          this.style.setProperty('--copy-text', '"Copied!"');
+          
+          // Reset after 2 seconds
+          setTimeout(() => {
+            this.style.setProperty('--copy-text', '"Copy"');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      }
+    });
+    
+    // Add copy cursor only in the copy button area
+    block.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      if (mouseX > rect.width - 80 && mouseY < 40) {
+        this.style.cursor = 'pointer';
+      } else {
+        this.style.cursor = 'default';
+      }
+    });
+  });
+});
+  
+  
+  </script>
 
 <!-- Clean Breadcrumb Navigation - Only show if not homepage -->
 {% if page.url != '/' %}
@@ -84,6 +135,8 @@
   
   <!-- Main content -->
   {{ content | safe }}
+
+  
 
 <footer class="site-footer">
   <div class="footer-content">
