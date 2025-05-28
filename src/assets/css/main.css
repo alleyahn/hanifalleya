@@ -2059,7 +2059,9 @@ nav a.active {
 /* Show only the meta tags - stacked vertically */
 /* Tea Tags - Leaf Shape */
 .tea-tag {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--riso-green);
   color: white;
   border-radius: 0 100% 0 100%;
@@ -2072,6 +2074,7 @@ nav a.active {
   font-weight: 600;
   cursor: default;
   margin: 3px;
+  min-height: 36px;
 }
 
 .tea-tag:nth-child(1) { transform: rotate(-10deg); }
