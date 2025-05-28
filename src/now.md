@@ -25,7 +25,7 @@ permalink: /now/
 - no na 🌺
 
 ## Eating/drinking
-- Eating all the Indonesian food I stuff myself with until my departure
+- Eating all the Indonesian food I can stuff myself with until then.
 
 ## Learning/Trying
 - Dutch, so I can find a part-time job.

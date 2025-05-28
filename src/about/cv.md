@@ -1,7 +1,7 @@
 ---
 layout: layouts/cv.njk
 title: CV
-permalink: /cv/
+permalink: /about/cv/
 ---
 
 # Alleya Hanifa

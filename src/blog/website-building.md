@@ -121,6 +121,9 @@ Disclaimer: I will not write about the step-by-step of the web development, but 
 
 I used this opportunity to familiarise myself with web development. Even though Claude does all the heavy work of writing the code, I instructed it to explain things to me so I can learn more about the languages and concepts used. I did it by inserting my preferences in the project instructions.
 
+![Projects](/assets/blog-images/website-building/project instructions.png)
+*Teach me, Claude Senpai!*
+
 ### Start prompting and building
 
 Insert your requirements along with the request. It can look something like:
