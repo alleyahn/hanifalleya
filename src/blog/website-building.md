@@ -6,6 +6,7 @@ author: Alleya Hanifa
 excerpt: How I, a coding n00b, built this pretty website with Claude.
 tags:
  - tech
+ - building
 ---
 
 Dusting off my personal website is almost like a yearly ritual. Around this time last year, I made my Jekyll-based personal website with the help of ChatGPT. It was okay-ish, but I had a really hard time customising it because Jekyll's limitation. Maybe it was also because of ChatGPT's capability at the time?
