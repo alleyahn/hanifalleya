@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="content-container photo-essay-container">
+  <article class="photo-essay">
+    <header class="photo-essay-header">
+      <h1>{{ title }}</h1>
+      <div class="post-meta">
+        <time datetime="{{ page.date | dateIso }}">{{ page.date | dateFormat }}</time>
+      </div>
+    </header>
+    
+    <div class="photo-essay-content">
+      {{ content | safe }}
+    </div>
+
+    {% if tags and tags.length > 0 %}
+      <div class="post-tags">
+        <h3>Tags:</h3>
+        <div class="tags-list">
+          {% for tag in tags %}
+            {% if tag != "photo-essay" %}
+              <a href="/tags/{{ tag | slug }}/" class="tag">{{ tag }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </article>
+  
+  <div class="post-navigation">
+    <a href="/blog">← Back to all posts</a>
+  </div>
+</div>
