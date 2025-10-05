@@ -1299,6 +1299,8 @@ nav a.active {
   text-align: center;
   transform: rotate(-3deg);
   max-width: 800px;
+  margin: 0 auto;  /* This centers the text block */
+  text-align: center;  /* This centers the text inside the block */
 }
 
 /* Postcard Gallery Grid */
