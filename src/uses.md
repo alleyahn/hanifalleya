@@ -2,20 +2,28 @@
 layout: layouts/about-now.njk
 title: Paid money and loved it
 permalink: /uses/
-date: 2025-05-01
+date: 2025-12-29
 ---
 Phyisical and digital products I genuinely love and recommend. 
 
 <small> 
 Some links are affiliate links (marked with ^), which means I might earn a small commission if you purchase through them (at no extra cost to you).</small>
 
-## Tech & Productivity
+# Travel
 
+- [**LDNIO power socket.^**](https://tk.tokopedia.com/ZShtLD5kp/) Hands down the best power socket I’ve ever owned. I take it with me for cafe work sessions and on work or leisure trips. I usually have a bunch of things to charge (watch, power bank, phone, camera battery, etc.) and this socket lets me charge everything at once. I especially love the USB-B and USB-C ports because I don’t need to bring multiple charger heads. It has a compact form factor that fits nicely in a backpack-- definitely less bulky than traditional multi-plugs, but sturdier and more reliable than typical travel adaptors 😬 but of course, it only offers 1 type of plug, but perfect if you're staying within regions that use the same socket type.
+  
+- **Duffle backpacks** I rarely bring luggages for travel, even for work trips. I only bring checked-in baggages when I go back to my husband's hometown for more than a week, otherwise I prefer to travel with these duffles. Both of these you can bring in the cabin.
+	- [Bigger one (from Artch)^](https://s.shopee.co.id/4LBvp3meM1) Got this for longer trips (5–6 days without doing laundry). The backpack straps are located at the bottom, which is a bit weird since it means your back touches the dirty part of the bag. But it has more exterior pockets than the Exsport one.
+	- [Smaller one (from Exsport)^](https://s.shopee.co.id/9fDSFrDK0k) Perfect for a weekend trip. Build quality is excellent. The backpack straps are placed on the top side, so your back touches the clean part of the bag. My favourite. I wish they made a bigger one.
+- **Toiletries**
+	- [Pouches for liquids](https://s.shopee.co.id/3VconsrdLx ). After trying vacuum bottles, upside-down bottles, and more, these are my go-to containers for thick liquids like soap, shampoo, and face wash. They’re compact, see-through, leak-proof, and come in various sizes.
+	- [Small perfume bottles](ttps://s.shopee.co.id/8fKuxQ1szy). These come in cute colours and are high quality. I transfer my perfumes into these small bottles so I can bring them everywhere and actually finish them! 😃 The store also sells syringes to help with the transfer, so don’t forget to grab those too.
+	- [Microfiber towel](https://www.decathlon.co.id/p/handuk-renang-mikrofiber-ukuran-m-60-x-80-cm-glacier-blue-decathlon-8749762.html). Sometimes, airbnbs don't offer towels so I always pack this. I like Decathlon's towels because they're compact and dry quickly (which means no odour), and feel softer compared to other microfiber towels I've bought. Compared to other microfiber towels I bought on Shopee, they're somehow dry quicker and softer to touch. The medium size is ideal for the gym, swimming, or travel.
+## Tech & Productivity
 
 #### Physical
 - [**Logitech Lift Mouse.^**](https://tk.tokopedia.com/ZShtLVo2P/) No more hurting wrist. Although it's a more affordable option compared to MX, it is still considerably pricey. But if you can't live without one, get something that keeps your wrist away from carpal tunnel syndrome (any ergonomic mouse, really). 
-
-- [**LDNIO power socket.^**](https://tk.tokopedia.com/ZShtLD5kp/) It is a must-bring for a work trip, particularly if you are sharing a room and power sockets with someone else. This strip will keep conflicts of securing power outlets away and keep your collegial relation healthy.
 
 ## Health
 
