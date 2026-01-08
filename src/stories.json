@@ -1,0 +1,20 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Alleya's Stories",
+  "feed_url": "https://hanifalleya.netlify.app/stories.json",
+  "_open_stories": {
+    "version": "0.0.1"
+  },
+  "items": [
+    {
+      "id": "story-1",
+      "url": "https://hanifalleya.netlify.app/posts/my-first-story",
+      "_open_stories": {
+        "url": "https://your-domain.com/path-to-image.jpg",
+        "alt": "Description of the image",
+        "mime_type": "image/jpeg"
+      },
+      "date_published": "2026-01-08T12:00:00Z"
+    }
+  ]
+}
